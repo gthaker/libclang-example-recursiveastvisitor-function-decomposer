@@ -19,7 +19,7 @@ public:
     {
         if(FunctionDecl *funcDecl = dyn_cast<FunctionDecl>(Declaration))
         {
-            llvm::outs() << "function name: " << funcDecl->getNameAsString() << " (return type = " << funcDecl->getResultType().getAsString() << ")\n";
+            llvm::outs() << "function name: " << funcDecl->getNameAsString() << " (return type = " << funcDecl->getReturnType().getAsString() << ")\n";
             unsigned paramCount = funcDecl->getNumParams();
             llvm::outs() << "function param count: " << paramCount << "\n";
             for(unsigned i = 0; i < paramCount; ++i)
@@ -86,8 +86,8 @@ private:
 
 //error handler
 struct FunctionDecomposerDiagnosticConsumer : clang::DiagnosticConsumer {
-    llvm::OwningPtr<DiagnosticConsumer> Proxy;
-    FunctionDecomposerDiagnosticConsumer(DiagnosticConsumer *Previous) : Proxy(Previous) {}
+  clang::DiagnosticConsumer *Proxy;
+    FunctionDecomposerDiagnosticConsumer(clang::DiagnosticConsumer *Previous) : Proxy(Previous) {}
 
     void BeginSourceFile(const clang::LangOptions& LangOpts, const clang::Preprocessor* PP = 0) { Proxy->BeginSourceFile(LangOpts, PP); }
     void clear(){ Proxy->clear(); }
