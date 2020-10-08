@@ -1,14 +1,14 @@
 execute_process(
-  COMMAND llvm-config-3.4 --cxxflags
+  COMMAND llvm-config --cxxflags
   OUTPUT_VARIABLE LibClang_DEFINITIONS)
 
 set(LibClang_DEFINITIONS ${LibClang_DEFINITIONS} "-fno-rtti")
 
 execute_process(
-  COMMAND llvm-config-3.4 --includedir
+  COMMAND llvm-config --includedir
   OUTPUT_VARIABLE LibClang_INCLUDE_DIR)
 
-set(LibClang_LIBRARY /usr/lib/llvm-3.4/lib/libclang.so)
+set(LibClang_LIBRARY /usr/lib/llvm-10/lib/libclang.so)
 
 find_library(LibClang_LIBRARY NAMES clang)
 
